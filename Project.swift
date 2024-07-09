@@ -27,5 +27,6 @@ let project = Project(
             resources: [],
             dependencies: [.target(name: "TaskManager")]
         ),
-    ]
+    ],
+    resourceSynthesizers: [.assets()]
 )

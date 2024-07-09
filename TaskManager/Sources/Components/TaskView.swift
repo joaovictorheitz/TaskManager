@@ -8,21 +8,43 @@
 import SwiftUI
 
 struct TaskView: View {
+    @StateObject var task: TaskModel
+    
     var body: some View {
         HStack {
             VStack {
-                
+                Button(action: { task.toggleStatus() }, label: {
+                    CheckBoxView(isChecked: $task.isChecked)
+                })
+                .padding()
             }
             
-            VStack {
-                Text("Title Task")
+            VStack (alignment: .leading) {
+                Text(task.title)
+                    .font(.system(size: 15))
+                    .foregroundStyle(TaskManagerAsset.Assets.titleTextColor.swiftUIColor)
+                    .strikethrough(task.isChecked)
                 
-                Text("Hour Task")
+                Text(task.hour)
+                    .font(.system(size: 13))
+                    .foregroundStyle(TaskManagerAsset.Assets.timeTextColor.swiftUIColor)
+                    .strikethrough(task.isChecked)
             }
+            .opacity(task.isChecked ? 0.3 : 1)
         }
     }
 }
 
 #Preview {
-    TaskView()
+    ZStack {
+        VStack {
+            Spacer()
+            HStack {
+                Spacer()
+                TaskView(task: TaskModel(title: "Lavar Louça", hour: "12:42"))
+                Spacer()
+            }
+            Spacer()
+        }
+    }
 }
