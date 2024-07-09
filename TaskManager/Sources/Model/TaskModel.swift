@@ -7,13 +7,15 @@
 
 import Foundation
 
-class TaskModel: ObservableObject {
+class TaskModel: ObservableObject, Identifiable {
+    var id = UUID()
+    
     var title: String
-    var hour: String
+    var hour: Date
     var status: TaskState
     @Published var isChecked: Bool
     
-    init(title: String, hour: String, status: TaskState = .uncompleted) {
+    init(title: String, hour: Date, status: TaskState = .uncompleted) {
         self.title = title
         self.hour = hour
         self.status = status

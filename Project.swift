@@ -2,17 +2,14 @@ import ProjectDescription
 
 let project = Project(
     name: "TaskManager",
+    options: .options(developmentRegion: "pt-BR"),
     targets: [
         .target(
             name: "TaskManager",
             destinations: .iOS,
             product: .app,
             bundleId: "io.tuist.TaskManager",
-            infoPlist: .extendingDefault(
-                with: [
-                    "UILaunchStoryboardName": "LaunchScreen.storyboard",
-                ]
-            ),
+            infoPlist: .default,
             sources: ["TaskManager/Sources/**"],
             resources: ["TaskManager/Resources/**"],
             dependencies: []
@@ -28,5 +25,5 @@ let project = Project(
             dependencies: [.target(name: "TaskManager")]
         ),
     ],
-    resourceSynthesizers: [.assets()]
+    resourceSynthesizers: [.strings(), .assets()]
 )

@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  TaskManager
+
+  Created by João Victor de Souza Guedes on 09/07/24.
+  
+*/
+
+"showDoneTasks" = "Mostrar completadas";
+"hideDoneTasks" = "Ocultar completadas";
+"yesterdayLabel" = "Ontem";
+"todayLabel" = "Hoje";
+"tomorrowLabel" = "Amanhã";

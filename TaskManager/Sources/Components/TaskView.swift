@@ -24,24 +24,30 @@ struct TaskView: View {
                     .font(.system(size: 15))
                     .foregroundStyle(TaskManagerAsset.Assets.titleTextColor.swiftUIColor)
                     .strikethrough(task.isChecked)
+                    .padding(.bottom, 2.5)
                 
-                Text(task.hour)
+                Text(task.hour.toSimpleHourMinute())
                     .font(.system(size: 13))
                     .foregroundStyle(TaskManagerAsset.Assets.timeTextColor.swiftUIColor)
                     .strikethrough(task.isChecked)
             }
             .opacity(task.isChecked ? 0.3 : 1)
+            
+            Spacer()
         }
     }
 }
 
 #Preview {
     ZStack {
+        let calendar = Calendar.current
+        let now = Date()
+        
         VStack {
             Spacer()
             HStack {
                 Spacer()
-                TaskView(task: TaskModel(title: "Lavar Louça", hour: "12:42"))
+                TaskView(task: TaskModel(title: "Lavar Louça", hour: calendar.date(bySettingHour: 8, minute: 2, second: 0, of: now)!))
                 Spacer()
             }
             Spacer()
