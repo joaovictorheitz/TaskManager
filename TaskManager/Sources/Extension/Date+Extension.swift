@@ -16,7 +16,7 @@ extension Date {
         return hourString
     }
 
-    func toSimpleDate() -> String? {
+    func toSimpleDate() -> String {
         let calendar = Calendar(identifier: .gregorian)
         let componentsSet: Set<Calendar.Component> = [.year, .month, .day]
         let components = calendar.dateComponents(componentsSet, from: self)
@@ -33,7 +33,8 @@ extension Date {
         } else if calendar.isDateInTomorrow(self) {
             return TaskManagerStrings.tomorrowLabel
         } else {
-            guard let day = components.day, let monthNumber = components.month else { return nil }
+            let day = components.day!
+            let monthNumber = components.month!
             formatter.dateFormat = "MMMM"
             let month = formatter.monthSymbols[monthNumber - 1]
             

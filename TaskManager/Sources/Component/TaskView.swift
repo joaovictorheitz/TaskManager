@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TaskView: View {
-    @StateObject var task: TaskModel
+    @State var task: TaskModel
     
     var body: some View {
         HStack {

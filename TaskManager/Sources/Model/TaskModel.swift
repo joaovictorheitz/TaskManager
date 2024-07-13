@@ -7,13 +7,13 @@
 
 import Foundation
 
-class TaskModel: ObservableObject, Identifiable {
+struct TaskModel: Identifiable {        
     var id = UUID()
     
     var title: String
     var hour: Date
     var status: TaskState
-    @Published var isChecked: Bool
+    var isChecked: Bool
     
     init(title: String, hour: Date, status: TaskState = .uncompleted) {
         self.title = title
@@ -22,8 +22,30 @@ class TaskModel: ObservableObject, Identifiable {
         self.isChecked = status.rawValue != 0
     }
     
-    func toggleStatus() {
+    mutating func toggleStatus() {
         self.status.toggleStatus()
         self.isChecked = self.status.rawValue != 0
+    }
+}
+
+extension [TaskModel] {
+    func orderedList() -> [TaskModel] {
+        return self.sorted(by: { $0.hour.compare($1.hour) == .orderedAscending})
+    }
+    
+    func orderedDictionary() -> [Date : [TaskModel]] {
+        var tasksByDate: [Date: [TaskModel]] = [:]
+        
+        for task in self {
+            let taskDate = Calendar.current.startOfDay(for: task.hour)
+            
+            if tasksByDate[taskDate] == nil {
+                tasksByDate[taskDate] = [task]
+            } else {
+                tasksByDate[taskDate]?.append(task)
+            }
+        }
+        
+        return tasksByDate
     }
 }
