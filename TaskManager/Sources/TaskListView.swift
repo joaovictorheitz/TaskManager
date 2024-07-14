@@ -12,7 +12,7 @@ public struct ListTaskView: View {
         ZStack {
             VStack {
                 ScrollView {
-                    ForEach(viewModel.tasksDictionary.keys.sorted(), id: \.self) { date in                        
+                    ForEach(viewModel.taskDictionary.keys.sorted(), id: \.self) { date in                        
                         HStack {
                             DayLabelView(date.toSimpleDate())
                             
@@ -28,7 +28,7 @@ public struct ListTaskView: View {
                         }
                         .padding()
                         
-                        ForEach(viewModel.tasksDictionary[date] ?? [], id: \.id) { task in
+                        ForEach(viewModel.taskDictionary[date] ?? [], id: \.id) { task in
                             TaskView(task: task)
                                 .padding(.leading, 20)
                         }
@@ -40,7 +40,7 @@ public struct ListTaskView: View {
     }
     
     func shouldShowHideButton(_ date: Date) -> Bool {
-        return date == viewModel.tasksDictionary.keys.sorted().first
+        return date == viewModel.taskDictionary.keys.sorted().first
     }
 }
 
