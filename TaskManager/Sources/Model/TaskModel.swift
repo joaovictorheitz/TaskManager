@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import SwiftData
 
-struct TaskModel: Identifiable {        
-    var id = UUID()
+@Model
+final class TaskModel: Identifiable {
+    @Attribute(.unique) var id = UUID()
     
     var title: String
     var hour: Date
@@ -22,7 +24,7 @@ struct TaskModel: Identifiable {
         self.isChecked = status.rawValue != 0
     }
     
-    mutating func toggleStatus() {
+    func toggleStatus() {
         self.status.toggleStatus()
         self.isChecked = self.status.rawValue != 0
     }

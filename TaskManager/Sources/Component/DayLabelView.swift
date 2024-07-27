@@ -22,5 +22,5 @@ struct DayLabelView: View {
 }
 
 #Preview {
-    DayLabelView(TaskManagerStrings.todayLabel)
+    DayLabelView(TaskManagerStrings.today)
 }

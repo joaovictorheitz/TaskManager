@@ -8,6 +8,10 @@
 
 "showDoneTasks" = "Mostrar completadas";
 "hideDoneTasks" = "Ocultar completadas";
-"yesterdayLabel" = "Ontem";
-"todayLabel" = "Hoje";
-"tomorrowLabel" = "Amanhã";
+"yesterday" = "Ontem";
+"today" = "Hoje";
+"tomorrow" = "Amanhã";
+"addATask" = "Adicione uma tarefa";
+"title" = "Titúlo";
+"hour" = "Hora";
+"save" = "Salvar";

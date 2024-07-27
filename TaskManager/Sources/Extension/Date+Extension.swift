@@ -27,11 +27,11 @@ extension Date {
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         
         if calendar.isDateInYesterday(self) {
-            return TaskManagerStrings.yesterdayLabel
+            return TaskManagerStrings.yesterday
         } else if calendar.isDateInToday(self) {
-            return TaskManagerStrings.todayLabel
+            return TaskManagerStrings.today
         } else if calendar.isDateInTomorrow(self) {
-            return TaskManagerStrings.tomorrowLabel
+            return TaskManagerStrings.tomorrow
         } else {
             let day = components.day!
             let monthNumber = components.month!

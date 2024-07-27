@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum TaskState: Int {
+enum TaskState: Int, Codable {
     case completed = 1
     case uncompleted = 0
     
