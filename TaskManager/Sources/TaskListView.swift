@@ -65,7 +65,7 @@ public struct ListTaskView: View {
                     AddTaskSheetView(text: $text, 
                                      selectedDate: $dateSelected,
                                      isShowingSheet: $isShowingSheet,
-                                     completion: saveAndUpdate)
+                                     completion: insertAndUpdate)
                 }
             })
         }
@@ -79,7 +79,7 @@ public struct ListTaskView: View {
         return date == viewModel.taskDictionary.keys.sorted().first
     }
     
-    func saveAndUpdate() {
+    func insertAndUpdate() {
         modelContext.insert(TaskModel(title: text, hour: dateSelected))
         viewModel.updateViewModelList(tasks)
     }
