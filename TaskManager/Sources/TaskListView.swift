@@ -17,58 +17,56 @@ public struct ListTaskView: View {
     }
     
     public var body: some View {
-        NavigationStack {
-            ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom)) {
-                VStack {
-                    ScrollView {
-                        ForEach(viewModel.taskDictionary.keys.sorted(), id: \.self) { date in
-                            HStack {
-                                DayLabelView(date.toSimpleDate())
-                                
-                                Spacer()
-                                
-                                if shouldShowHideButton(date) {
-                                    VStack {
-                                        Spacer()
-                                        
-                                        HideCompletedTasksButtonView(shouldHideDoneTasks: $viewModel.shouldHideDoneTasks)
-                                    }
+        ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom)) {
+            VStack {
+                ScrollView {
+                    ForEach(viewModel.taskDictionary.keys.sorted(), id: \.self) { date in
+                        HStack {
+                            DayLabelView(date.toSimpleDate())
+                            
+                            Spacer()
+                            
+                            if shouldShowHideButton(date) {
+                                VStack {
+                                    Spacer()
+                                    
+                                    HideCompletedTasksButtonView(shouldHideDoneTasks: $viewModel.shouldHideDoneTasks)
                                 }
                             }
-                            .padding()
-                            
-                            ForEach(viewModel.taskDictionary[date] ?? [], id: \.id) { task in
-                                if shouldShowTask(task: task) {
-                                    TaskView(task: task)
-                                        .padding(.leading, 20)
-                                }
+                        }
+                        .padding()
+                        
+                        ForEach(viewModel.taskDictionary[date] ?? [], id: \.id) { task in
+                            if shouldShowTask(task: task) {
+                                TaskView(task: task)
+                                    .padding(.leading, 20)
                             }
                         }
                     }
                 }
-                
-                Button(action: { isShowingSheet.toggle() }, label: {
-                    Circle()
-                        .frame(width: 42, height: 42)
-                        .overlay {
-                            Image(systemName: "plus")
-                                .foregroundStyle(Color.white)
-                                .frame(width: 17.68, height: 17.68)
-                        }
-                })
-                .tint(.black)
-                .padding(30)
             }
-            .background(TaskManagerAsset.Assets.backgroundColor.swiftUIColor)
-            .sheet(isPresented: $isShowingSheet, content: {
-                NavigationStack {
-                    AddTaskSheetView(text: $text, 
-                                     selectedDate: $dateSelected,
-                                     isShowingSheet: $isShowingSheet,
-                                     completion: insertAndUpdate)
-                }
+            
+            Button(action: { isShowingSheet.toggle() }, label: {
+                Circle()
+                    .frame(width: 42, height: 42)
+                    .overlay {
+                        Image(systemName: "plus")
+                            .foregroundStyle(Color.white)
+                            .frame(width: 17.68, height: 17.68)
+                    }
             })
+            .tint(.black)
+            .padding(30)
         }
+        .background(TaskManagerAsset.Assets.backgroundColor.swiftUIColor)
+        .sheet(isPresented: $isShowingSheet, content: {
+            NavigationStack {
+                AddTaskSheetView(text: $text,
+                                 selectedDate: $dateSelected,
+                                 isShowingSheet: $isShowingSheet,
+                                 completion: insertAndUpdate)
+            }
+        })
         .background(TaskManagerAsset.Assets.backgroundColor.swiftUIColor)
         .onAppear {
             viewModel.updateViewModelList(tasks)

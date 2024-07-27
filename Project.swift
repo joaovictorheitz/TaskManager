@@ -9,7 +9,11 @@ let project = Project(
             destinations: .iOS,
             product: .app,
             bundleId: "io.tuist.TaskManager",
-            infoPlist: .default,
+            infoPlist: .extendingDefault(
+                with: [
+                    "UILaunchStoryboardName": "LaunchScreen.storyboard",
+                ]
+            ),
             sources: ["TaskManager/Sources/**"],
             resources: ["TaskManager/Resources/**"],
             dependencies: []
