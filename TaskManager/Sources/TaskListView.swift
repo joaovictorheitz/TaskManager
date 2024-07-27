@@ -18,28 +18,32 @@ public struct ListTaskView: View {
     
     public var body: some View {
         ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom)) {
-            VStack {
-                ScrollView {
-                    ForEach(viewModel.taskDictionary.keys.sorted(), id: \.self) { date in
-                        HStack {
-                            DayLabelView(date.toSimpleDate())
-                            
-                            Spacer()
-                            
-                            if shouldShowHideButton(date) {
-                                VStack {
-                                    Spacer()
-                                    
-                                    HideCompletedTasksButtonView(shouldHideDoneTasks: $viewModel.shouldHideDoneTasks)
+            HStack {
+                Spacer()
+                
+                VStack {
+                    ScrollView {
+                        ForEach(viewModel.taskDictionary.keys.sorted(), id: \.self) { date in
+                            HStack {
+                                DayLabelView(date.toSimpleDate())
+                                
+                                Spacer()
+                                
+                                if shouldShowHideButton(date) {
+                                    VStack {
+                                        Spacer()
+                                        
+                                        HideCompletedTasksButtonView(shouldHideDoneTasks: $viewModel.shouldHideDoneTasks)
+                                    }
                                 }
                             }
-                        }
-                        .padding()
-                        
-                        ForEach(viewModel.taskDictionary[date] ?? [], id: \.id) { task in
-                            if shouldShowTask(task: task) {
-                                TaskView(task: task)
-                                    .padding(.leading, 20)
+                            .padding()
+                            
+                            ForEach(viewModel.taskDictionary[date] ?? [], id: \.id) { task in
+                                if shouldShowTask(task: task) {
+                                    TaskView(task: task)
+                                        .padding(.leading, 20)
+                                }
                             }
                         }
                     }
@@ -71,6 +75,7 @@ public struct ListTaskView: View {
         .onAppear {
             viewModel.updateViewModelList(tasks)
         }
+        .frame(maxWidth: .infinity)
     }
     
     func shouldShowHideButton(_ date: Date) -> Bool {
