@@ -37,7 +37,7 @@ public struct ListTaskView: View {
                             }
                             .padding()
                             
-                            ForEach(viewModel.taskDictionary[date] ?? [], id: \.id) { task in                                
+                            ForEach(viewModel.taskDictionary[date] ?? [], id: \.id) { task in
                                 if shouldShowTask(task: task) {
                                     TaskView(task: task)
                                         .padding(.leading, 20)
@@ -57,6 +57,7 @@ public struct ListTaskView: View {
                         }
                 })
                 .tint(.black)
+                .padding(30)
             }
             .background(TaskManagerAsset.Assets.backgroundColor.swiftUIColor)
             .sheet(isPresented: $isShowingSheet, content: {
