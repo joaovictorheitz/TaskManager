@@ -10,7 +10,7 @@ import SwiftData
 
 struct AddTaskSheetView: View {
     @Binding var text: String
-    @Binding var dateSelected: Date
+    @Binding var selectedDate: Date
     @Binding var isShowingSheet: Bool
     
     var completion: () -> Void
@@ -37,13 +37,15 @@ struct AddTaskSheetView: View {
                         .font(.system(size: 20))
                         .fontWeight(.semibold)
                     
-                    DatePicker(selection: $dateSelected, label: {EmptyView()})
+                    DatePicker(selection: $selectedDate, label: {EmptyView()})
                 }
                 .padding(.bottom, 100)
                 
                 Button(action: {
                     completion()
                     
+                    text = ""
+                    selectedDate = Date()
                     isShowingSheet.toggle()
                 }, label: {
                     RoundedRectangle(cornerRadius: 16)
@@ -64,5 +66,5 @@ struct AddTaskSheetView: View {
 }
 
 #Preview {
-    AddTaskSheetView(text: .constant(""), dateSelected: .constant(Date()), isShowingSheet: .constant(true), completion: {})
+    AddTaskSheetView(text: .constant(""), selectedDate: .constant(Date()), isShowingSheet: .constant(true), completion: {})
 }

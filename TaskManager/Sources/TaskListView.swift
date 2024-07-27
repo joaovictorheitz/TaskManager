@@ -63,7 +63,7 @@ public struct ListTaskView: View {
             .sheet(isPresented: $isShowingSheet, content: {
                 NavigationStack {
                     AddTaskSheetView(text: $text, 
-                                     dateSelected: $dateSelected,
+                                     selectedDate: $dateSelected,
                                      isShowingSheet: $isShowingSheet,
                                      completion: saveAndUpdate)
                 }
